@@ -1,9 +1,12 @@
-import React from "react";
 import { render, screen } from "@testing-library/react";
 import App from "./App";
 
-test("renders learn react link", () => {
-  render(<App />);
-  const element = screen.getByText(/Hello World/i);
+test("renders title and login icon", () => {
+  const { asFragment } = render(<App />);
+  const element = screen.getByText(/Hack Ideas/i);
+  const icon = screen.getByTestId("login");
+  expect(icon).toBeInTheDocument();
   expect(element).toBeInTheDocument();
+
+  expect(asFragment()).toMatchSnapshot();
 });

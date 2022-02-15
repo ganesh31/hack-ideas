@@ -44,6 +44,16 @@
       "name": "Joey",
       "hacks": [],
       "id": 9
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 10
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 11
     }
   ],
   "hacks": [
@@ -74,10 +84,8 @@
         2
       ],
       "createdAt": 1644929794114,
-      "likes": 1,
-      "likedBy": [
-        1
-      ],
+      "likes": 0,
+      "likedBy": [],
       "id": 2
     }
   ],

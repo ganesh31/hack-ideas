@@ -44,7 +44,7 @@ function App() {
       {user && (
         <h1 className="text-center bg-green-200">Welcome {user.name}</h1>
       )}
-      <main className="md:mx-5 lg:mx-7 xl:mx-64 w-screen p-3">
+      <main className="md:mx-5 lg:mx-7 xl:mx-64 p-3">
         <Routes>
           <Route path="/" element={<Navigate to="/hacks" replace />} />
           <Route path="/login" element={<Login onUser={onUser} />} />

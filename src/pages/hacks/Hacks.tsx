@@ -1,4 +1,8 @@
-import { PlusSmIcon } from "@heroicons/react/outline";
+import {
+  ArrowNarrowDownIcon,
+  ArrowNarrowUpIcon,
+  PlusSmIcon,
+} from "@heroicons/react/outline";
 import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import invariant from "tiny-invariant";
@@ -37,6 +41,24 @@ const filterBySearchText = (
     });
 };
 
+const sortByLikes = (ascending: boolean, hacks: Hack[]) =>
+  hacks.sort((a, b) => {
+    if (ascending) {
+      return b.likes - a.likes;
+    } else {
+      return a.likes - b.likes;
+    }
+  });
+
+const sortByDate = (ascending: boolean, hack: Hack[]) =>
+  hack.sort((a, b) => {
+    if (ascending) {
+      return b.createdAt - a.createdAt;
+    } else {
+      return a.createdAt - b.createdAt;
+    }
+  });
+
 const Hacks: React.FC<Props> = (props: Props) => {
   const navigate = useNavigate();
   const [allHacks, setAllHacks] = useState<Hack[]>([]);
@@ -44,6 +66,9 @@ const Hacks: React.FC<Props> = (props: Props) => {
 
   const [searchText, setSearchText] = useState("");
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+
+  const [likedAscending, setLikedAscending] = useState(true);
+  const [createdAtAscending, setCreatedAtAscending] = useState(true);
 
   useEffect(() => {
     async function fetch() {
@@ -116,9 +141,19 @@ const Hacks: React.FC<Props> = (props: Props) => {
     );
   };
 
+  const sortedHacksByLikes = useMemo(
+    () => sortByLikes(likedAscending, memoizedFilterHacks),
+    [likedAscending, memoizedFilterHacks]
+  );
+
+  const sortedHacksByCreatedAt = useMemo(
+    () => sortByDate(createdAtAscending, sortedHacksByLikes),
+    [createdAtAscending, sortedHacksByLikes]
+  );
+
   return (
     <div className=" flex flex-col items-center">
-      <div className=" grid-cols-auto-fit grid w-full gap-2 mb-5">
+      <div className=" grid w-full gap-2 mb-5">
         <div className="flex flex-col space-y-1">
           <Textfield
             name="search"
@@ -135,6 +170,32 @@ const Hacks: React.FC<Props> = (props: Props) => {
         </div>
       </div>
       <div className="flex w-full mb-2">
+        <div
+          className="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
+          onClick={() => setLikedAscending(!likedAscending)}
+        >
+          <span className="border-r-slate-800 text-sm md:text-base whitespace-nowrap pr-1 border">
+            Most Liked
+          </span>
+          {likedAscending ? (
+            <ArrowNarrowUpIcon className="w-5 h-5" />
+          ) : (
+            <ArrowNarrowDownIcon className="w-5 h-5" />
+          )}
+        </div>
+        <div
+          className="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
+          onClick={() => setCreatedAtAscending(!createdAtAscending)}
+        >
+          <span className="border-r-slate-800 text-sm md:text-base whitespace-nowrap pr-1 border">
+            Created At
+          </span>
+          {createdAtAscending ? (
+            <ArrowNarrowUpIcon className="w-5 h-5" />
+          ) : (
+            <ArrowNarrowDownIcon className="w-5 h-5" />
+          )}
+        </div>
         {props.user && (
           <div className="flex self-end justify-end w-full">
             <Link to="/add">
@@ -153,8 +214,8 @@ const Hacks: React.FC<Props> = (props: Props) => {
         )}
       </div>
       <section className="grid-cols-auto-fit grid w-full gap-2">
-        {memoizedFilterHacks.length > 0 ? (
-          memoizedFilterHacks.map((hack) => {
+        {sortedHacksByCreatedAt.length > 0 ? (
+          sortedHacksByCreatedAt.map((hack) => {
             return (
               <Card
                 data-testid="hack"

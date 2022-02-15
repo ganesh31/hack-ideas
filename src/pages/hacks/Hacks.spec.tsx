@@ -110,4 +110,29 @@ describe("Hacks", () => {
 
     expect(screen.queryByTestId("button-like")).toBeNull();
   });
+
+  it("should filter hacks based on tag select", async () => {
+    render(
+      <BrowserRouter>
+        <Hacks user={null} />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId("button-like").length).not.toEqual(0);
+    });
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId("tag").length).not.toEqual(0);
+    });
+
+    const element = screen.getAllByTestId("tag");
+    // Before filter
+    expect(screen.getAllByTestId("button-like").length).toEqual(2);
+
+    fireEvent.click(element[0]);
+
+    // after filter
+    expect(screen.getAllByTestId("button-like").length).toEqual(1);
+  });
 });

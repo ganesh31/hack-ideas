@@ -14,12 +14,27 @@ interface Props {
   user: User | null;
 }
 
-const filterBySearchText = (searchText: string, allHacks: Hack[]) => {
-  return allHacks.filter(({ title }) => {
-    return searchText === ""
-      ? true
-      : title.toLowerCase().includes(searchText.toLowerCase());
-  });
+const filterBySearchText = (
+  selectedTags: Tag[],
+  searchText: string,
+  allHacks: Hack[]
+) => {
+  return allHacks
+    .filter(({ title }) => {
+      return searchText === ""
+        ? true
+        : title.toLowerCase().includes(searchText.toLowerCase());
+    })
+    .filter(({ tags }) => {
+      if (selectedTags.length === 0) {
+        return true;
+      }
+      const filteredTags = tags.filter(
+        (tagId) => selectedTags.findIndex(({ id }) => tagId === id) !== -1
+      );
+
+      return filteredTags.length !== 0;
+    });
 };
 
 const Hacks: React.FC<Props> = (props: Props) => {
@@ -28,6 +43,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
   const [allTags, setAllTags] = useState<Tag[]>([]);
 
   const [searchText, setSearchText] = useState("");
+  const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
 
   useEffect(() => {
     async function fetch() {
@@ -63,11 +79,42 @@ const Hacks: React.FC<Props> = (props: Props) => {
     }
   };
 
+  const onTagSelect = (tag: Tag) => {
+    if (selectedTags.length === 0) {
+      setSelectedTags([tag]);
+    } else {
+      if (!selectedTags.find(({ id }) => id === tag.id)) {
+        setSelectedTags([...selectedTags, tag]);
+      } else {
+        setSelectedTags(selectedTags.filter(({ id }) => tag.id !== id));
+      }
+    }
+  };
+
   const memoizedFilterHacks = useMemo(
-    () => filterBySearchText(searchText, allHacks),
+    () => filterBySearchText(selectedTags, searchText, allHacks),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [searchText, allHacks]
+    [selectedTags, searchText, allHacks]
   );
+  const renderTag = (tag: Tag) => {
+    const isTagSelected =
+      selectedTags.findIndex(({ id }) => tag.id === id) !== -1;
+
+    return (
+      <span
+        key={tag.id}
+        data-testid={`tag`}
+        onClick={() => onTagSelect(tag)}
+        className={` whitespace-nowrap px-4 py-1 text-xs rounded-md ${
+          isTagSelected
+            ? "bg-slate-800 text-slate-100"
+            : "bg-slate-200 text-gray-600"
+        }`}
+      >
+        {tag.name}
+      </span>
+    );
+  };
 
   return (
     <div className=" flex flex-col items-center">
@@ -82,6 +129,9 @@ const Hacks: React.FC<Props> = (props: Props) => {
             placeholder="Search By Title"
             noLabel
           />
+        </div>
+        <div className="scrollbar-hide space-x-1 overflow-x-scroll">
+          {allTags.map(renderTag)}
         </div>
       </div>
       <div className="flex w-full mb-2">

@@ -44,7 +44,7 @@ function App() {
               )
             }
           />
-          <Route path="/hacks" element={<Hacks />} />
+          <Route path="/hacks" element={<Hacks user={user} />} />
         </Routes>
       </main>
     </>

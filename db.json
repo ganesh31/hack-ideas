@@ -263,9 +263,10 @@
       ],
       "author": 1,
       "createdAt": 1644652610245,
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        125
+        125,
+        1
       ],
       "id": 1
     }

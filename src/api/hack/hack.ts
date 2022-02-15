@@ -19,3 +19,31 @@ export const addHack = async (payload: Omit<Hack, "id">) => {
   }
   return null;
 };
+
+export const updateHack = async (hackId: number, userId: number) => {
+  const { data } = await axios.get<Hack>(`${HOSTNAME}/hacks/${hackId}`);
+
+  const likedByUser = data.likedBy.includes(userId);
+
+  let payload = {};
+  if (likedByUser) {
+    payload = {
+      ...data,
+      likes: data.likes - 1,
+      likedBy: data.likedBy.filter((id) => id !== userId),
+    };
+  } else {
+    payload = {
+      ...data,
+      likes: data.likes + 1,
+      likedBy: [...data.likedBy, userId],
+    };
+  }
+
+  const response = await axios.put<Hack>(
+    `${HOSTNAME}/hacks/${hackId}`,
+    payload
+  );
+
+  return response;
+};

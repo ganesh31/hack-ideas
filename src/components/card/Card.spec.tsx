@@ -50,7 +50,7 @@ describe("Card", () => {
 
     expect(asFragment()).toMatchSnapshot();
 
-    fireEvent.click(screen.getByTestId("button"));
+    fireEvent.click(screen.getByTestId("button-like"));
     expect(mockToggle).toBeCalledTimes(1);
   });
 });

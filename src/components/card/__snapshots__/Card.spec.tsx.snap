@@ -24,7 +24,7 @@ exports[`Card should call onToggle when user clicks on like button 1`] = `
         <svg
           aria-hidden="true"
           class="text-red-600 w-5 h-5"
-          data-testid="button"
+          data-testid="button-like"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

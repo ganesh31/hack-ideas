@@ -23,14 +23,14 @@ exports[`Hacks should render all the hacks 1`] = `
             class="flex space-x-1"
           >
             <span
-              class=""
+              data-testid="likes-count"
             >
-              1
+              2
             </span>
             <svg
               aria-hidden="true"
               class="text-red-600 w-5 h-5"
-              data-testid="button"
+              data-testid="button-like"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"

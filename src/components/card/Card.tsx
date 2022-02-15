@@ -24,9 +24,9 @@ function Card({ hack, onToggleLike, allTags }: Props) {
       <div className="flex justify-between">
         <div className="text-lg font-bold">{hack.title}</div>
         <div className="flex space-x-1">
-          <span className="">{hack.likes || ""}</span>
+          <span data-testid="likes-count">{hack.likes || ""}</span>
           <ThumbUpIcon
-            data-testid={"button"}
+            data-testid={"button-like"}
             onClick={() => onToggleLike(hack.id)}
             className={`${hack.likes !== 0 ? "text-red-600" : ""} w-5 h-5`}
           />

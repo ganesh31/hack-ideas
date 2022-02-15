@@ -68,14 +68,14 @@ describe("Hacks", () => {
       expect(screen.getByText(/Jan Circuits '22/i)).toBeInTheDocument();
     });
 
-    const likesElement = screen.getByTestId("likes-count");
+    const likesElement = screen.queryAllByTestId("likes-count");
 
-    let likesCount = parseInt(likesElement.innerHTML) || 0;
-
+    let likesCount =
+      parseInt(likesElement?.length > 0 ? likesElement[0].innerHTML : "") || 0;
     fireEvent.click(screen.getAllByTestId("button-like")[0]);
 
     await waitFor(() => {
-      expect(screen.getByTestId("likes-count")).toHaveTextContent(
+      expect(screen.queryAllByTestId("likes-count")[0]).toHaveTextContent(
         (likesCount - 1).toString()
       );
     });
@@ -83,7 +83,7 @@ describe("Hacks", () => {
     fireEvent.click(screen.getAllByTestId("button-like")[0]);
 
     await waitFor(() => {
-      expect(screen.getByTestId("likes-count")).toHaveTextContent(
+      expect(screen.queryAllByTestId("likes-count")[0]).toHaveTextContent(
         likesCount.toString()
       );
     });

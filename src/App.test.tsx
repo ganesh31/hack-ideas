@@ -30,3 +30,34 @@ test("should navigate to login page on click of login icon", async () => {
   const element = screen.getByTestId("loginOverlay");
   expect(element).toBeInTheDocument();
 });
+
+test("should be able to login/logout", async () => {
+  render(
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  );
+  await waitFor(() => {
+    const icon = screen.getByTestId("login");
+    expect(icon).toBeInTheDocument();
+  });
+  fireEvent.click(screen.getByTestId("login"));
+  const element = screen.getByTestId("loginOverlay");
+  expect(element).toBeInTheDocument();
+
+  fireEvent.change(screen.getByPlaceholderText("Employee Id"), {
+    target: { value: 1 },
+  });
+
+  fireEvent.click(screen.getByText("Submit"));
+
+  await waitFor(() => {
+    expect(screen.getByText("Welcome John")).toBeInTheDocument();
+  });
+
+  expect(screen.getByTestId("logout")).toBeInTheDocument();
+
+  fireEvent.click(screen.getByTestId("logout"));
+
+  expect(screen.getByTestId("login")).toBeInTheDocument();
+});

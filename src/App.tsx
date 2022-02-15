@@ -1,6 +1,6 @@
-import { CodeIcon, LoginIcon } from "@heroicons/react/outline";
+import { CodeIcon, LoginIcon, LogoutIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import AddHack from "./pages/addHack/AddHack";
 import Hacks from "./pages/hacks/Hacks";
 import Login from "./pages/login/Login";
@@ -9,10 +9,17 @@ import { User } from "./types/user";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
+  const navigate = useNavigate();
 
   const onUser = (user: User) => {
     setUser(user);
   };
+
+  const onLogout = () => {
+    setUser(null);
+    navigate("/hacks");
+  };
+
   return (
     <>
       <header className="bg-slate-800 text-slate-100 flex justify-between px-4 border-r border-slate-50">
@@ -22,9 +29,17 @@ function App() {
           <span>Hack Ideas</span>
           <CodeIcon className="w-6 h-6" />
         </h1>
-        <Link to={"/login"}>
-          <LoginIcon data-testid="login" className=" w-8 h-8" />
-        </Link>
+        {!user ? (
+          <Link to={"/login"}>
+            <LoginIcon data-testid="login" className=" w-8 h-8" />
+          </Link>
+        ) : (
+          <LogoutIcon
+            data-testid="logout"
+            onClick={onLogout}
+            className="w-8 h-8"
+          />
+        )}
       </header>
       {user && (
         <h1 className="text-center bg-green-200">Welcome {user.name}</h1>

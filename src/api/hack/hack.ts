@@ -11,3 +11,11 @@ export const getAllHacks = async () => {
 
   return null;
 };
+
+export const addHack = async (payload: Omit<Hack, "id">) => {
+  const response = await axios.post<Hack>(`${HOSTNAME}/hacks`, payload);
+  if (response?.statusText?.toLowerCase() === "created") {
+    return response.data;
+  }
+  return null;
+};

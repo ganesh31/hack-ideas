@@ -33,6 +33,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
           allHacks.map((hack) => {
             return (
               <Card
+                data-testid="hack"
                 key={hack.id}
                 allTags={allTags}
                 hack={hack}

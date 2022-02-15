@@ -1,6 +1,7 @@
 import { CodeIcon, LoginIcon } from "@heroicons/react/outline";
 import { useState } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
+import AddHack from "./pages/addHack/AddHack";
 import Hacks from "./pages/hacks/Hacks";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
@@ -31,6 +32,16 @@ function App() {
           <Route path="/" element={<Navigate to="/hacks" replace />} />
           <Route path="/login" element={<Login onUser={onUser} />} />
           <Route path="/register" element={<Register onUser={onUser} />} />
+          <Route
+            path="/add"
+            element={
+              user ? (
+                <AddHack user={user} />
+              ) : (
+                <Navigate to="/login" state={{ redirectTo: "/add" }} />
+              )
+            }
+          />
           <Route path="/hacks" element={<Hacks />} />
         </Routes>
       </main>

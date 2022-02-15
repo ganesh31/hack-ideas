@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Hacks should render all the hacks 1`] = `
+<DocumentFragment>
+  <div
+    class=" flex flex-col items-center"
+  >
+    <section
+      class="grid-cols-auto-fit grid w-full gap-2"
+    >
+      <h1
+        class="text-center font-semibold "
+      >
+        Sorry no hacks are currently available.
+      </h1>
+      <p
+        class="italic text-center"
+      >
+        Waiting for someone to add some hacks
+      </p>
+    </section>
+  </div>
+</DocumentFragment>
+`;

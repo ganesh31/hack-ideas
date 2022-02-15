@@ -6,29 +6,79 @@
       "hacks": []
     },
     {
-      "name": "Joey",
+      "name": "Ross",
       "hacks": [],
       "id": 2
     },
     {
-      "name": "Ross",
+      "name": "Joey",
       "hacks": [],
-      "id": 13
+      "id": 3
     },
     {
-      "name": "Jack",
+      "name": "Ross",
       "hacks": [],
-      "id": 26
+      "id": 4
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 5
     },
     {
       "name": "Joey",
       "hacks": [],
-      "id": 27
+      "id": 6
     },
     {
       "name": "Ross",
       "hacks": [],
-      "id": 28
+      "id": 7
+    }
+  ],
+  "hacks": [
+    {
+      "title": "Jan Circuits '22",
+      "description": "Solve a challenge and win exiting prizes 🎉",
+      "question": "## First Factorial <br /> Have the function  `firstFacorial`(**num**)  take the  **num**  parameter being passed and return the factorial of it. For example: if  **num**  = 4, then your program should return  **(4 * 3 * 2 * 1)**  = 24. For the test cases, the range will be between 1 and 18 and the input will always be an integer.<br />### Examples```Input:  4\nOutput:  24```\n```Input:  8 \n Output:  40320```",
+      "tags": [
+        1,
+        2,
+        3
+      ],
+      "author": 1,
+      "createdAt": 1644652610245,
+      "likes": 1,
+      "likedBy": [
+        125
+      ],
+      "id": 1
+    }
+  ],
+  "tags": [
+    {
+      "id": 1,
+      "name": "recursion"
+    },
+    {
+      "id": 2,
+      "name": "math fundamentals"
+    },
+    {
+      "id": 3,
+      "name": "data structures"
+    },
+    {
+      "id": 4,
+      "name": "advanced"
+    },
+    {
+      "id": 5,
+      "name": "binary search"
+    },
+    {
+      "id": 6,
+      "name": "intermediate"
     }
   ]
 }

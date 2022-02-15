@@ -51,6 +51,25 @@ exports[`renders title and login icon 1`] = `
   </header>
   <main
     class="md:mx-5 lg:mx-7 xl:mx-64 m-3"
-  />
+  >
+    <div
+      class=" flex flex-col items-center"
+    >
+      <section
+        class="grid-cols-auto-fit grid w-full gap-2"
+      >
+        <h1
+          class="text-center font-semibold "
+        >
+          Sorry no hacks are currently available.
+        </h1>
+        <p
+          class="italic text-center"
+        >
+          Waiting for someone to add some hacks
+        </p>
+      </section>
+    </div>
+  </main>
 </DocumentFragment>
 `;

@@ -4,6 +4,26 @@
       "id": 1,
       "name": "John",
       "hacks": []
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 2
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 3
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 4
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 5
     }
   ],
   "hacks": [
@@ -18,9 +38,10 @@
       ],
       "author": 1,
       "createdAt": 1644652610245,
-      "likes": 1,
+      "likes": 2,
       "likedBy": [
-        125
+        125,
+        1
       ],
       "id": 1
     },

@@ -15,7 +15,7 @@ function App() {
   };
   return (
     <>
-      <header className="bg-slate-800 text-slate-100 flex justify-between px-4">
+      <header className="bg-slate-800 text-slate-100 flex justify-between px-4 border-r border-slate-50">
         {/* this div is there to bring the H1 to center */}
         <div></div>
         <h1 className="flex items-center space-x-3 text-xl font-black tracking-widest">
@@ -26,7 +26,9 @@ function App() {
           <LoginIcon data-testid="login" className=" w-8 h-8" />
         </Link>
       </header>
-      {user && <h1 className="text-center bg-green-200">Welcome {user.id}</h1>}
+      {user && (
+        <h1 className="text-center bg-green-200">Welcome {user.name}</h1>
+      )}
       <main className="md:mx-5 lg:mx-7 xl:mx-64 m-3">
         <Routes>
           <Route path="/" element={<Navigate to="/hacks" replace />} />

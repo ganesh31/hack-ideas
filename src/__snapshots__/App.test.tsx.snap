@@ -3,7 +3,7 @@
 exports[`renders title and login icon 1`] = `
 <DocumentFragment>
   <header
-    class="bg-slate-800 text-slate-100 flex justify-between px-4"
+    class="bg-slate-800 text-slate-100 flex justify-between px-4 border-r border-slate-50"
   >
     <div />
     <h1

@@ -26,7 +26,6 @@ function AddHack(props: Props) {
   useEffect(() => {
     async function fetch() {
       const tags = await getAllTags();
-      console.log("USE EFFECT");
       invariant(tags, "no tags available");
       setTags(tags);
     }
@@ -70,7 +69,6 @@ function AddHack(props: Props) {
     selectedTags.length === 0 ||
     questionContent === "";
 
-  console.log(tags);
   return (
     <section className="space-y-4">
       <header>

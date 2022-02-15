@@ -27,7 +27,6 @@ const Hacks: React.FC<Props> = (props: Props) => {
 
   return (
     <div className=" flex flex-col items-center">
-      {/* <hr className="w-full mb-2 border border-red-900" /> */}
       <section className="grid-cols-auto-fit grid w-full gap-2">
         {allHacks.length > 0 ? (
           allHacks.map((hack) => {

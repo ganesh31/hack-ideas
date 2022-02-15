@@ -18,13 +18,10 @@ const Overlay: React.FC<Props> = (props: Props) => {
   const escPressed = useKeyPress("Escape");
 
   const closeOverlay = () => {
-    console.log("Colse Overlay");
     props.onClose();
   };
 
   const handleOutsideClick = () => {
-    console.log("outside click");
-
     if (props.closeOnOutsideClick) {
       closeOverlay();
     }

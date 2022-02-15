@@ -18,7 +18,6 @@ export async function addNewUser(name: string) {
   const payload: Omit<User, "id"> = { name, hacks: [] };
   try {
     const response = await axios.post<User>(`${HOSTNAME}/users`, payload);
-    console.log(response);
 
     if (response.statusText === "Created") {
       return response.data;

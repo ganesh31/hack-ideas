@@ -22,7 +22,6 @@ export default function Login(props: Props) {
 
   const onSubmit = async () => {
     const user = await isUserExists(empId);
-    console.log(user, "user");
 
     if (user) {
       setOpen(false);

@@ -54,6 +54,21 @@
       "name": "Ross",
       "hacks": [],
       "id": 11
+    },
+    {
+      "name": "Rachel",
+      "hacks": [],
+      "id": 12
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 13
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 14
     }
   ],
   "hacks": [
@@ -70,7 +85,7 @@
       "createdAt": 1644652610245,
       "likes": 2,
       "likedBy": [
-        125,
+        12,
         1
       ],
       "id": 1
@@ -84,8 +99,11 @@
         2
       ],
       "createdAt": 1644929794114,
-      "likes": 0,
-      "likedBy": [],
+      "likes": 2,
+      "likedBy": [
+        14,
+        1
+      ],
       "id": 2
     }
   ],

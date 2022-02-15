@@ -58,13 +58,15 @@ export default function Login(props: Props) {
           </h1>
         )}
         <Link
-          className="text-sky-700 block underline"
+          id="register"
+          className="text-sky-700 block underline w-fit"
           to={"/register"}
           state={location.state}
         >
           Register
         </Link>
         <button
+          id="login-submit"
           className="shadow-slate-400 text-slate-50 active:bg-slate-800 hover:bg-slate-600 bg-slate-800 px-4 py-2 border rounded shadow-sm"
           onClick={onSubmit}
         >

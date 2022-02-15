@@ -121,14 +121,14 @@ const Hacks: React.FC<Props> = (props: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [selectedTags, searchText, allHacks]
   );
-  const renderTag = (tag: Tag) => {
+  const renderTag = (tag: Tag, index: number) => {
     const isTagSelected =
       selectedTags.findIndex(({ id }) => tag.id === id) !== -1;
 
     return (
       <span
         key={tag.id}
-        data-testid={`tag`}
+        data-testid={`tag-${index}`}
         onClick={() => onTagSelect(tag)}
         className={` whitespace-nowrap px-4 py-1 text-xs rounded-md ${
           isTagSelected
@@ -171,6 +171,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
       </div>
       <div className="flex w-full mb-2">
         <div
+          id="mostLiked"
           className="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
           onClick={() => setLikedAscending(!likedAscending)}
         >
@@ -184,6 +185,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
           )}
         </div>
         <div
+          id="createdAt"
           className="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
           onClick={() => setCreatedAtAscending(!createdAtAscending)}
         >
@@ -198,7 +200,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
         </div>
         {props.user && (
           <div className="flex self-end justify-end w-full">
-            <Link to="/add">
+            <Link id="addNewHack" to="/add">
               <div
                 data-testid="addHack"
                 className="shadow-slate-400 text-slate-800 active:bg-slate-600 hover:bg-slate-400 bg-slate-50 min-w-[80px] flex items-center justify-center py-1 px-2 rounded shadow"

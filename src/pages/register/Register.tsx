@@ -43,6 +43,7 @@ export default function Register(props: Props) {
               placeholder="Name"
             />
             <button
+              id="register"
               className="shadow-slate-400 text-slate-50 active:bg-slate-800 hover:bg-slate-600 bg-slate-800 px-4 py-2 border rounded shadow-sm"
               onClick={onSubmit}
             >
@@ -56,8 +57,9 @@ export default function Register(props: Props) {
             </p>
             <p>Please use the Employee Id for future logins</p>
             <Link
+              id="ok"
               to={"/"}
-              className="shadow-slate-400 text-slate-50 active:bg-slate-800 hover:bg-slate-600 bg-slate-800 w-6/12 px-4 py-2 mt-3 border rounded shadow-sm"
+              className="shadow-slate-400 text-slate-50 active:bg-slate-800 hover:bg-slate-600 bg-slate-800 w-6/12 px-4 py-2 mt-3 border rounded shadow-sm text-center"
             >
               Ok
             </Link>

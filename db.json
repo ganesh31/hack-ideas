@@ -6,54 +6,14 @@
       "hacks": []
     },
     {
-      "name": "Ross",
+      "name": "Jack",
       "hacks": [],
       "id": 2
     },
     {
-      "name": "Joey",
+      "name": "Jack",
       "hacks": [],
       "id": 3
-    },
-    {
-      "name": "Ross",
-      "hacks": [],
-      "id": 4
-    },
-    {
-      "name": "Joey",
-      "hacks": [],
-      "id": 5
-    },
-    {
-      "name": "Ross",
-      "hacks": [],
-      "id": 6
-    },
-    {
-      "name": "Joey",
-      "hacks": [],
-      "id": 7
-    },
-    {
-      "name": "Ross",
-      "hacks": [],
-      "id": 8
-    },
-    {
-      "name": "Joey",
-      "hacks": [],
-      "id": 9
-    },
-    {
-      "name": "Ross",
-      "hacks": [],
-      "id": 10
-    },
-    {
-      "name": "Joey",
-      "hacks": [],
-      "id": 11
     }
   ],
   "hacks": [
@@ -76,17 +36,30 @@
       "id": 1
     },
     {
-      "title": "Challenge 2",
+      "title": "Challenge 5",
       "description": "Test your coding skills",
       "authorId": 1,
-      "question": "Question",
+      "question": "## Question",
       "tags": [
         2
       ],
-      "createdAt": 1644929794114,
+      "createdAt": 1644944616971,
       "likes": 0,
       "likedBy": [],
       "id": 2
+    },
+    {
+      "title": "Challenge 5",
+      "description": "Test your coding skills",
+      "authorId": 1,
+      "question": "## Question",
+      "tags": [
+        2
+      ],
+      "createdAt": 1644944652741,
+      "likes": 0,
+      "likedBy": [],
+      "id": 3
     }
   ],
   "tags": [

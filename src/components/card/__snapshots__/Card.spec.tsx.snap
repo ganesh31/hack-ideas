@@ -26,6 +26,7 @@ exports[`Card should call onToggle when user clicks on like button 1`] = `
           class="text-red-600 w-5 h-5"
           data-testid="button-like"
           fill="none"
+          id="like-5"
           stroke="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

@@ -36,6 +36,7 @@ exports[`renders title and login icon 1`] = `
         class=" w-8 h-8"
         data-testid="login"
         fill="none"
+        id="login"
         stroke="currentColor"
         viewBox="0 0 24 24"
         xmlns="http://www.w3.org/2000/svg"
@@ -83,11 +84,12 @@ exports[`renders title and login icon 1`] = `
       >
         <div
           class="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
+          id="mostLiked"
         >
           <span
             class="border-r-slate-800 text-sm md:text-base whitespace-nowrap pr-1 border"
           >
-            Most Liked 
+            Most Liked
           </span>
           <svg
             aria-hidden="true"
@@ -107,6 +109,7 @@ exports[`renders title and login icon 1`] = `
         </div>
         <div
           class="hover:cursor-pointer border-slate-800 flex items-center px-2 space-x-2 border"
+          id="createdAt"
         >
           <span
             class="border-r-slate-800 text-sm md:text-base whitespace-nowrap pr-1 border"

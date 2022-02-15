@@ -31,10 +31,11 @@ function App() {
         </h1>
         {!user ? (
           <Link to={"/login"}>
-            <LoginIcon data-testid="login" className=" w-8 h-8" />
+            <LoginIcon id="login" data-testid="login" className=" w-8 h-8" />
           </Link>
         ) : (
           <LogoutIcon
+            id="logout"
             data-testid="logout"
             onClick={onLogout}
             className="w-8 h-8"

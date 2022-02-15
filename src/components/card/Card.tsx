@@ -27,6 +27,7 @@ function Card({ hack, onToggleLike, allTags }: Props) {
           <span data-testid="likes-count">{hack.likes || ""}</span>
           <ThumbUpIcon
             data-testid={"button-like"}
+            id={`like-${hack.id}`}
             onClick={() => onToggleLike(hack.id)}
             className={`${hack.likes !== 0 ? "text-red-600" : ""} w-5 h-5`}
           />

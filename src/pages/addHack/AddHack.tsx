@@ -94,6 +94,7 @@ function AddHack(props: Props) {
               selectedTags.findIndex((tag) => tag.id === id) !== -1;
             return (
               <button
+                id={`tag-${id}`}
                 tabIndex={0}
                 className={`flex text-slate-900 focus:outline-slate-500 focus:ring-slate-500 justify-center items-center text-xs font-medium md:text-sm md:font-normal px-3 py-1 rounded-full space-x-1 whitespace-nowrap border bg-slate-50  hover:cursor-pointer ${
                   isActive
@@ -130,6 +131,7 @@ function AddHack(props: Props) {
           Cancel
         </button>
         <button
+          id="submit"
           className="shadow-slate-400 md:w-1/6 disabled:bg-slate-500 text-slate-50 active:bg-slate-800 hover:bg-slate-600 bg-slate-800 w-2/6 py-2 border rounded shadow-sm"
           onClick={onSubmit}
           disabled={disableSubmit}

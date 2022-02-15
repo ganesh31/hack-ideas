@@ -31,6 +31,7 @@ function MDEditor({ label, ...props }: Props) {
         </label>
         <div className="hover:cursor-pointer flex justify-end mt-4">
           <button
+            id="previewToggle"
             className="shadow-slate-400 text-slate-800 active:bg-slate-50 hover:bg-slate-300 md:w-24 md:text-sm w-20 px-2 py-1 text-xs border rounded shadow"
             onClick={onToggleMD}
           >

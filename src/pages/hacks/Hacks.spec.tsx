@@ -122,10 +122,11 @@ describe("Hacks", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getAllByTestId("tag").length).not.toEqual(0);
+      expect(screen.getAllByTestId("tag-1").length).not.toEqual(0);
     });
 
-    const element = screen.getAllByTestId("tag");
+    const element = screen.getAllByTestId("tag-0");
+    console.log(element[0].innerHTML);
     // Before filter
     expect(screen.getAllByTestId("button-like").length).toEqual(2);
 
@@ -147,7 +148,7 @@ describe("Hacks", () => {
     });
 
     await waitFor(() => {
-      expect(screen.getAllByTestId("tag").length).not.toEqual(0);
+      expect(screen.getAllByTestId("tag-1").length).not.toEqual(0);
     });
 
     fireEvent.click(screen.getByText("Created At"));

@@ -17,6 +17,26 @@ describe("Hacks", () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
+  it("should not show the add hack button if the user is not logged in", () => {
+    render(
+      <BrowserRouter>
+        <Hacks user={null} />
+      </BrowserRouter>
+    );
+
+    expect(screen.queryByTestId("addHack")).not.toBeInTheDocument();
+  });
+
+  it("should show the add hack button if the user is logged in", () => {
+    render(
+      <BrowserRouter>
+        <Hacks user={{ id: 1, name: "John", hacks: [] }} />
+      </BrowserRouter>
+    );
+
+    expect(screen.getByTestId("addHack")).toBeInTheDocument();
+  });
+
   it("should navigate to login page if user is not logged in and clicks on the like button", async () => {
     render(
       <BrowserRouter>

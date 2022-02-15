@@ -17,7 +17,7 @@ exports[`Card should call onToggle when user clicks on like button 1`] = `
         class="flex space-x-1"
       >
         <span
-          class=""
+          data-testid="likes-count"
         >
           1
         </span>

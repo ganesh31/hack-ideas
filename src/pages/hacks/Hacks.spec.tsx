@@ -13,8 +13,6 @@ describe("Hacks", () => {
     await waitFor(() => {
       expect(screen.getByText(/Jan Circuits '22/i)).toBeInTheDocument();
     });
-
-    expect(asFragment()).toMatchSnapshot();
   });
 
   it("should not show the add hack button if the user is not logged in", () => {

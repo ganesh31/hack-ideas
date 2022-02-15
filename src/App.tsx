@@ -1,7 +1,8 @@
 import { CodeIcon, LoginIcon } from "@heroicons/react/outline";
 import { useState } from "react";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
 import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
 import { User } from "./types/user";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
       <main className="md:mx-5 lg:mx-7 xl:mx-64 m-3">
         <Routes>
           <Route path="/login" element={<Login onUser={onUser} />} />
+          <Route path="/register" element={<Register onUser={onUser} />} />
         </Routes>
       </main>
     </>

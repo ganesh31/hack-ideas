@@ -1,7 +1,34 @@
 {
-  "users": [{
-    "id": 1,
-    "name": "John",
-    "hacks": []
-  }]
+  "users": [
+    {
+      "id": 1,
+      "name": "John",
+      "hacks": []
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 2
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 13
+    },
+    {
+      "name": "Jack",
+      "hacks": [],
+      "id": 26
+    },
+    {
+      "name": "Joey",
+      "hacks": [],
+      "id": 27
+    },
+    {
+      "name": "Ross",
+      "hacks": [],
+      "id": 28
+    }
+  ]
 }

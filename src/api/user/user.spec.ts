@@ -1,4 +1,4 @@
-import { isUserExists } from "./user";
+import { addNewUser, isUserExists } from "./user";
 
 describe("user API", () => {
   it("should return the user", async () => {
@@ -11,5 +11,13 @@ describe("user API", () => {
     const user = await isUserExists("123");
 
     expect(user).toBeNull();
+  });
+
+  describe("Add New User", () => {
+    it("should return the user on successful API", async () => {
+      const user = await addNewUser("Joey");
+
+      expect(user?.name).toEqual("Joey");
+    });
   });
 });

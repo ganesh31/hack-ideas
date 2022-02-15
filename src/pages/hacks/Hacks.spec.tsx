@@ -4,14 +4,14 @@ import Hacks from "./Hacks";
 
 describe("Hacks", () => {
   it("should render all the hacks", async () => {
-    const { asFragment } = render(
+    render(
       <BrowserRouter>
         <Hacks user={null} />
       </BrowserRouter>
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Jan Circuits '22/i)).toBeInTheDocument();
+      expect(screen.getAllByTestId("button-like").length).not.toEqual(0);
     });
   });
 
@@ -43,7 +43,7 @@ describe("Hacks", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Jan Circuits '22/i)).toBeInTheDocument();
+      expect(screen.getAllByTestId("button-like").length).not.toEqual(0);
     });
 
     fireEvent.click(screen.getAllByTestId("button-like")[0]);
@@ -63,7 +63,7 @@ describe("Hacks", () => {
     );
 
     await waitFor(() => {
-      expect(screen.getByText(/Jan Circuits '22/i)).toBeInTheDocument();
+      expect(screen.getAllByTestId("button-like").length).not.toEqual(0);
     });
 
     const likesElement = screen.queryAllByTestId("likes-count");
@@ -85,5 +85,29 @@ describe("Hacks", () => {
         likesCount.toString()
       );
     });
+  });
+
+  it("should filter hacks based on search text", async () => {
+    render(
+      <BrowserRouter>
+        <Hacks user={null} />
+      </BrowserRouter>
+    );
+
+    await waitFor(() => {
+      expect(screen.getAllByTestId("button-like").length).not.toEqual(0);
+    });
+
+    fireEvent.change(screen.getByPlaceholderText("Search By Title"), {
+      target: { value: "jan" },
+    });
+
+    expect(screen.getAllByTestId("button-like").length).toEqual(1);
+
+    fireEvent.change(screen.getByPlaceholderText("Search By Title"), {
+      target: { value: "jack" },
+    });
+
+    expect(screen.queryByTestId("button-like")).toBeNull();
   });
 });

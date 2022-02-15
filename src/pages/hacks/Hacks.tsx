@@ -1,10 +1,11 @@
 import { PlusSmIcon } from "@heroicons/react/outline";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import invariant from "tiny-invariant";
 import { getAllHacks, updateHack } from "../../api/hack/hack";
 import { getAllTags } from "../../api/tag/tag";
 import Card from "../../components/card/Card";
+import Textfield from "../../components/textfield/Textfield";
 import { Hack } from "../../types/hack";
 import { Tag } from "../../types/tag";
 import { User } from "../../types/user";
@@ -13,10 +14,20 @@ interface Props {
   user: User | null;
 }
 
+const filterBySearchText = (searchText: string, allHacks: Hack[]) => {
+  return allHacks.filter(({ title }) => {
+    return searchText === ""
+      ? true
+      : title.toLowerCase().includes(searchText.toLowerCase());
+  });
+};
+
 const Hacks: React.FC<Props> = (props: Props) => {
   const navigate = useNavigate();
   const [allHacks, setAllHacks] = useState<Hack[]>([]);
   const [allTags, setAllTags] = useState<Tag[]>([]);
+
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     async function fetch() {
@@ -52,8 +63,27 @@ const Hacks: React.FC<Props> = (props: Props) => {
     }
   };
 
+  const memoizedFilterHacks = useMemo(
+    () => filterBySearchText(searchText, allHacks),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [searchText, allHacks]
+  );
+
   return (
     <div className=" flex flex-col items-center">
+      <div className=" grid-cols-auto-fit grid w-full gap-2 mb-5">
+        <div className="flex flex-col space-y-1">
+          <Textfield
+            name="search"
+            value={searchText}
+            onChange={(e) => {
+              setSearchText(e.target.value);
+            }}
+            placeholder="Search By Title"
+            noLabel
+          />
+        </div>
+      </div>
       <div className="flex w-full mb-2">
         {props.user && (
           <div className="flex self-end justify-end w-full">
@@ -73,8 +103,8 @@ const Hacks: React.FC<Props> = (props: Props) => {
         )}
       </div>
       <section className="grid-cols-auto-fit grid w-full gap-2">
-        {allHacks.length > 0 ? (
-          allHacks.map((hack) => {
+        {memoizedFilterHacks.length > 0 ? (
+          memoizedFilterHacks.map((hack) => {
             return (
               <Card
                 data-testid="hack"

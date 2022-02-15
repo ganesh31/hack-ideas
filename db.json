@@ -24,6 +24,21 @@
         1
       ],
       "id": 1
+    },
+    {
+      "title": "Challenge 2",
+      "description": "Test your coding skills",
+      "authorId": 1,
+      "question": "Question",
+      "tags": [
+        2
+      ],
+      "createdAt": 1644929794114,
+      "likes": 1,
+      "likedBy": [
+        1
+      ],
+      "id": 2
     }
   ],
   "tags": [

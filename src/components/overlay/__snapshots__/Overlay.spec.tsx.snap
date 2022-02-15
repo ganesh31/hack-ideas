@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Overlay should not render the overlay if open is false 1`] = `<DocumentFragment />`;

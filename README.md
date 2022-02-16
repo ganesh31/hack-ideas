@@ -2,22 +2,39 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Hack Ideas
 
-In the project directory, you can run:
+A place to share hack ideas
 
-### `yarn start`
+## Before running the application make sure the `json-server` is up
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Testing
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+#### `yarn cypress:run`
 
-### `yarn test`
+starts the test db, starts the application and run e2e tests.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### `yarn test:all`
+
+Using concurrently
+
+1. Launches the `json-server` with `db-test.json`.
+2. Launches the test runner in the interactive watch mode.
+
+#### `yarn test:coverage`
+
+This is dependent on the `json-server`. So start `yarn test:db` then in a new terminal run `yarn test:coverage`
+
+#### `yarn test`
+
+This is dependent on the `json-server`. So start `yarn test:db` then in a new terminal run `yarn test`
+THis launches jest in interactive watch mode.
+
+### Development
+
+#### `yarn start`
+
+starts the dev db, starts the application
 
 ### `yarn build`
 

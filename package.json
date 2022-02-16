@@ -27,14 +27,15 @@
     "web-vitals": "^2.1.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "concurrently \"npm:start:db\" \"react-scripts start\"",
     "build": "react-scripts build",
     "test": "NODE_OPTIONS=--experimental-vm-modules react-scripts test",
     "test:coverage": "NODE_OPTIONS=--experimental-vm-modules react-scripts test --coverage",
     "test:all": "concurrently \"npm:test:db\" \"NODE_OPTIONS=--experimental-vm-modules react-scripts test --coverage\"",
     "eject": "react-scripts eject",
     "test:db": "json-server db-test.json --port 3001",
-    "start:db": "json-server --watch db.json --port 3001"
+    "start:db": "json-server --watch db.json --port 3001",
+    "cypress:run": "concurrently \"npm:test:db\" \"react-scripts start\" \"cypress run\""
   },
   "eslintConfig": {
     "extends": [

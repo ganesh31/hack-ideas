@@ -18,6 +18,7 @@ function ErrorFallback({ error, resetErrorBoundary }: any) {
         <div role="alert" className="">
           <p className="text-center">Oh snap!</p>
           <pre className="text-center">{error.message}</pre>
+          <pre className="text-center">&#128532; Is the JSON-SEVER up??</pre>
         </div>
         <button
           className="underline text-blue-500"

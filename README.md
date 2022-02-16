@@ -44,7 +44,14 @@ It correctly bundles React in production mode and optimizes the build for the be
 The build is minified and the filenames include the hashes.\
 Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Deployment
+
+Build the application `yarn build`.
+Build the docker image `docker build -t hack-ideas .`
+Run the image `docker run -p 8080:80 -d hack-ideas`
+Run `yarn star:db` to start the `json-server`
+
+The application will be running in `http://localhost:8080/`
 
 ### `yarn eject`
 

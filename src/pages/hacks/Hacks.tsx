@@ -86,9 +86,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
   const onToggleLike = async (hackId: number) => {
     const hack = allHacks.find(({ id }) => id === hackId);
 
-    if (!hack) {
-      throw new Error("unknown hack");
-    }
+    invariant(hack, "unknown hack");
 
     if (!props.user) {
       navigate("/login", { state: { redirectTo: "/hacks" } });
@@ -97,6 +95,7 @@ const Hacks: React.FC<Props> = (props: Props) => {
 
     const updatedHack = await updateHack(hackId, props.user.id);
 
+    /* istanbul ignore else */
     if (updatedHack?.status === 200) {
       const hacks = await getAllHacks();
       invariant(hacks, "no hacks available");
@@ -107,13 +106,16 @@ const Hacks: React.FC<Props> = (props: Props) => {
   const onTagSelect = (tag: Tag) => {
     if (selectedTags.length === 0) {
       setSelectedTags([tag]);
-    } else {
-      if (!selectedTags.find(({ id }) => id === tag.id)) {
-        setSelectedTags([...selectedTags, tag]);
-      } else {
-        setSelectedTags(selectedTags.filter(({ id }) => tag.id !== id));
-      }
+      return;
     }
+
+    /** add the tag only if its not already present */
+    if (!selectedTags.find(({ id }) => id === tag.id)) {
+      setSelectedTags([...selectedTags, tag]);
+      return;
+    }
+    /** if tag is present then remove it */
+    setSelectedTags(selectedTags.filter(({ id }) => tag.id !== id));
   };
 
   const memoizedFilterHacks = useMemo(
@@ -220,7 +222,6 @@ const Hacks: React.FC<Props> = (props: Props) => {
           sortedHacksByCreatedAt.map((hack) => {
             return (
               <Card
-                data-testid="hack"
                 key={hack.id}
                 allTags={allTags}
                 hack={hack}

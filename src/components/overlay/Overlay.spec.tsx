@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import Overlay from "./Overlay";
 
 describe("Overlay", () => {
@@ -17,12 +17,12 @@ describe("Overlay", () => {
 
   it("should not render the overlay if open is false", () => {
     const mockClose = jest.fn();
-    const { asFragment } = render(
+    render(
       <Overlay onClose={mockClose} open={false}>
         Overlay Content
       </Overlay>
     );
 
-    expect(asFragment()).toMatchSnapshot();
+    expect(screen.queryByText("Overlay Content")).not.toBeInTheDocument();
   });
 });

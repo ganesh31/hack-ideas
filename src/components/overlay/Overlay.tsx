@@ -22,6 +22,7 @@ const Overlay: React.FC<Props> = (props: Props) => {
   };
 
   const handleOutsideClick = () => {
+    /* istanbul ignore else */
     if (props.closeOnOutsideClick) {
       closeOverlay();
     }
@@ -29,6 +30,7 @@ const Overlay: React.FC<Props> = (props: Props) => {
   useOutsideClick(ref, handleOutsideClick);
 
   useEffect(() => {
+    /* istanbul ignore else */
     if (escPressed && props.closeOnEscape) {
       closeOverlay();
     }

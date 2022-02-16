@@ -8,6 +8,16 @@ test("renders title and login icon", async () => {
       <App />
     </BrowserRouter>
   );
+  await waitFor(() => {
+    expect(screen.getByTestId("tag-0")).toBeInTheDocument();
+  });
+
+  await waitFor(() => {
+    expect(
+      screen.queryByText("Sorry no hacks are currently available.")
+    ).not.toBeInTheDocument();
+  });
+
   const element = screen.getByText(/Hack Ideas/i);
   const icon = screen.getByTestId("login");
   expect(icon).toBeInTheDocument();
@@ -23,9 +33,17 @@ test("should navigate to login page on click of login icon", async () => {
     </BrowserRouter>
   );
   await waitFor(() => {
-    const icon = screen.getByTestId("login");
-    expect(icon).toBeInTheDocument();
+    expect(screen.getByTestId("tag-0")).toBeInTheDocument();
   });
+
+  await waitFor(() => {
+    expect(
+      screen.queryByText("Sorry no hacks are currently available.")
+    ).not.toBeInTheDocument();
+  });
+
+  const icon = screen.getByTestId("login");
+  expect(icon).toBeInTheDocument();
   fireEvent.click(screen.getByTestId("login"));
   const element = screen.getByTestId("loginOverlay");
   expect(element).toBeInTheDocument();
@@ -37,10 +55,8 @@ test("should be able to login/logout", async () => {
       <App />
     </BrowserRouter>
   );
-  await waitFor(() => {
-    const icon = screen.getByTestId("login");
-    expect(icon).toBeInTheDocument();
-  });
+  const icon = screen.getByTestId("login");
+  expect(icon).toBeInTheDocument();
   fireEvent.click(screen.getByTestId("login"));
   const element = screen.getByTestId("loginOverlay");
   expect(element).toBeInTheDocument();

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import invariant from "tiny-invariant";
 import { addNewUser } from "../../api/user/user";
 import Overlay from "../../components/overlay/Overlay";
 import Textfield from "../../components/textfield/Textfield";
@@ -17,9 +18,8 @@ export default function Register(props: Props) {
 
   const onSubmit = async () => {
     const user = await addNewUser(name);
-    if (user === null) {
-      throw new Error("Something went wrong");
-    }
+    invariant(user, "Something went wrong");
+
     props.onUser(user);
 
     setId(user.id);

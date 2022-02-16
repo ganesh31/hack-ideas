@@ -1,11 +1,34 @@
 import { CodeIcon, LoginIcon, LogoutIcon } from "@heroicons/react/outline";
+import { ExclamationIcon } from "@heroicons/react/solid";
 import { useState } from "react";
+import { ErrorBoundary } from "react-error-boundary";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import Overlay from "./components/overlay/Overlay";
 import AddHack from "./pages/addHack/AddHack";
 import Hacks from "./pages/hacks/Hacks";
 import Login from "./pages/login/Login";
 import Register from "./pages/register/Register";
 import { User } from "./types/user";
+
+function ErrorFallback({ error, resetErrorBoundary }: any) {
+  return (
+    <Overlay open={true} onClose={() => {}}>
+      <div className="flex flex-col justify-center w-full items-center">
+        <ExclamationIcon className="h-10 w-10 text-red-600" />
+        <div role="alert" className="">
+          <p className="text-center">Oh snap!</p>
+          <pre className="text-center">{error.message}</pre>
+        </div>
+        <button
+          className="underline text-blue-500"
+          onClick={resetErrorBoundary}
+        >
+          /Home
+        </button>
+      </div>
+    </Overlay>
+  );
+}
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -45,24 +68,29 @@ function App() {
       {user && (
         <h1 className="text-center bg-green-200">Welcome {user.name}</h1>
       )}
-      <main className="md:mx-5 lg:mx-7 xl:mx-64 p-3">
-        <Routes>
-          <Route path="/" element={<Navigate to="/hacks" replace />} />
-          <Route path="/login" element={<Login onUser={onUser} />} />
-          <Route path="/register" element={<Register onUser={onUser} />} />
-          <Route
-            path="/add"
-            element={
-              user ? (
-                <AddHack user={user} />
-              ) : (
-                <Navigate to="/login" state={{ redirectTo: "/add" }} />
-              )
-            }
-          />
-          <Route path="/hacks" element={<Hacks user={user} />} />
-        </Routes>
-      </main>
+      <ErrorBoundary
+        FallbackComponent={ErrorFallback}
+        onReset={() => navigate("/")}
+      >
+        <main className="md:mx-5 lg:mx-7 xl:mx-64 p-3">
+          <Routes>
+            <Route path="/" element={<Navigate to="/hacks" replace />} />
+            <Route path="/login" element={<Login onUser={onUser} />} />
+            <Route path="/register" element={<Register onUser={onUser} />} />
+            <Route
+              path="/add"
+              element={
+                user ? (
+                  <AddHack user={user} />
+                ) : (
+                  <Navigate to="/login" state={{ redirectTo: "/add" }} />
+                )
+              }
+            />
+            <Route path="/hacks" element={<Hacks user={user} />} />
+          </Routes>
+        </main>
+      </ErrorBoundary>
     </>
   );
 }

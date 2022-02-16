@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { isUserExists } from "../../api/user/user";
 import Overlay from "../../components/overlay/Overlay";
@@ -19,20 +20,25 @@ export default function Login(props: Props) {
   const [open, setOpen] = useState(true);
   const [empId, setEmpId] = useState("");
   const [userError, setUserError] = useState(false);
+  const errorHandler = useErrorHandler();
 
   const onSubmit = async () => {
-    const user = await isUserExists(empId);
+    try {
+      const user = await isUserExists(empId);
 
-    if (user) {
-      setOpen(false);
-      setUserError(false);
-      props.onUser(user);
-      const state = location.state as LocationState;
-      const redirectTo = state?.redirectTo || "/hacks";
+      if (user) {
+        setOpen(false);
+        setUserError(false);
+        props.onUser(user);
+        const state = location.state as LocationState;
+        const redirectTo = state?.redirectTo || "/hacks";
 
-      navigate(redirectTo);
-    } else {
-      setUserError(true);
+        navigate(redirectTo);
+      } else {
+        setUserError(true);
+      }
+    } catch (error) /* istanbul ignore next */ {
+      errorHandler(error);
     }
   };
 

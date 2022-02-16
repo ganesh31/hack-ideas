@@ -4,10 +4,11 @@ import {
   PlusSmIcon,
 } from "@heroicons/react/outline";
 import { useEffect, useMemo, useState } from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { Link, useNavigate } from "react-router-dom";
 import invariant from "tiny-invariant";
-import { getAllHacks, updateHack } from "../../api/hack/hack";
-import { getAllTags } from "../../api/tag/tag";
+import { getAllHacksAPI, updateHackAPI } from "../../api/hack/hack";
+import { getAllTagsAPI } from "../../api/tag/tag";
 import Card from "../../components/card/Card";
 import Textfield from "../../components/textfield/Textfield";
 import { Hack } from "../../types/hack";
@@ -70,17 +71,36 @@ const Hacks: React.FC<Props> = (props: Props) => {
   const [likedAscending, setLikedAscending] = useState(true);
   const [createdAtAscending, setCreatedAtAscending] = useState(true);
 
-  useEffect(() => {
-    async function fetch() {
-      const hacks = await getAllHacks();
-      invariant(hacks, "no hacks available");
-      setAllHacks(hacks);
+  const errorHandler = useErrorHandler();
 
-      const tags = await getAllTags();
+  async function getAllTags() {
+    try {
+      const tags = await getAllTagsAPI();
       invariant(tags, "no tags available");
       setAllTags(tags);
+    } catch (error) /* istanbul ignore next */ {
+      errorHandler(error);
+    }
+  }
+
+  async function getAllHacks() {
+    try {
+      const hacks = await getAllHacksAPI();
+      invariant(hacks, "no hacks available");
+      setAllHacks(hacks);
+    } catch (error) /* istanbul ignore next */ {
+      errorHandler(error);
+    }
+  }
+
+  useEffect(() => {
+    async function fetch() {
+      await getAllTags();
+      await getAllHacks();
     }
     fetch();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onToggleLike = async (hackId: number) => {
@@ -93,13 +113,11 @@ const Hacks: React.FC<Props> = (props: Props) => {
       return;
     }
 
-    const updatedHack = await updateHack(hackId, props.user.id);
+    const updatedHack = await updateHackAPI(hackId, props.user.id);
 
     /* istanbul ignore else */
     if (updatedHack?.status === 200) {
-      const hacks = await getAllHacks();
-      invariant(hacks, "no hacks available");
-      setAllHacks(hacks);
+      await getAllHacks();
     }
   };
 

@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { Link, useNavigate } from "react-router-dom";
+
 import invariant from "tiny-invariant";
 import { addNewUser } from "../../api/user/user";
 import Overlay from "../../components/overlay/Overlay";
@@ -16,13 +18,19 @@ export default function Register(props: Props) {
 
   const [id, setId] = useState<number | null>(null);
 
+  const errorHandler = useErrorHandler();
+
   const onSubmit = async () => {
-    const user = await addNewUser(name);
-    invariant(user, "Something went wrong");
+    try {
+      const user = await addNewUser(name);
+      invariant(user, "Something went wrong");
 
-    props.onUser(user);
+      props.onUser(user);
 
-    setId(user.id);
+      setId(user.id);
+    } catch (error) /* istanbul ignore next */ {
+      errorHandler(error);
+    }
   };
 
   const onClose = () => {

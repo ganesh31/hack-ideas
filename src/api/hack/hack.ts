@@ -2,7 +2,7 @@ import axios from "axios";
 import { Hack } from "../../types/hack";
 import { HOSTNAME } from "../config";
 
-export const getAllHacks = async () => {
+export const getAllHacksAPI = async () => {
   const response = await axios.get<Hack[]>(`${HOSTNAME}/hacks`);
 
   if (response?.statusText?.toLowerCase() === "ok") {
@@ -12,7 +12,7 @@ export const getAllHacks = async () => {
   return null;
 };
 
-export const addHack = async (payload: Omit<Hack, "id">) => {
+export const addHackAPI = async (payload: Omit<Hack, "id">) => {
   const response = await axios.post<Hack>(`${HOSTNAME}/hacks`, payload);
   if (response?.statusText?.toLowerCase() === "created") {
     return response.data;
@@ -20,7 +20,7 @@ export const addHack = async (payload: Omit<Hack, "id">) => {
   return null;
 };
 
-export const updateHack = async (hackId: number, userId: number) => {
+export const updateHackAPI = async (hackId: number, userId: number) => {
   const { data } = await axios.get<Hack>(`${HOSTNAME}/hacks/${hackId}`);
 
   const likedByUser = data.likedBy.includes(userId);

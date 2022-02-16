@@ -1,9 +1,10 @@
 import { MinusCircleIcon, PlusCircleIcon } from "@heroicons/react/outline";
 import { useState, useEffect } from "react";
+import { useErrorHandler } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
 import invariant from "tiny-invariant";
-import { addHack } from "../../api/hack/hack";
-import { getAllTags } from "../../api/tag/tag";
+import { addHackAPI } from "../../api/hack/hack";
+import { getAllTagsAPI } from "../../api/tag/tag";
 import MDEditor from "../../components/mdEditor/MDEditor";
 import Textfield from "../../components/textfield/Textfield";
 import { Hack } from "../../types/hack";
@@ -23,13 +24,20 @@ function AddHack(props: Props) {
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
   const [questionContent, setQuestionContent] = useState<string>("");
 
+  const errorHandler = useErrorHandler();
+
   useEffect(() => {
     async function fetch() {
-      const tags = await getAllTags();
-      invariant(tags, "no tags available");
-      setTags(tags);
+      try {
+        const tags = await getAllTagsAPI();
+        invariant(tags, "no tags available");
+        setTags(tags);
+      } catch (error) {
+        errorHandler(error);
+      }
     }
     fetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const onToggleTag = ({ id, name }: Tag) => {
@@ -52,10 +60,15 @@ function AddHack(props: Props) {
       likes: 0,
       likedBy: [],
     };
-    const hack = await addHack(payload);
 
-    if (hack?.id) {
-      navigate("/hacks");
+    try {
+      const hack = await addHackAPI(payload);
+
+      if (hack?.id) {
+        navigate("/hacks");
+      }
+    } catch (error) {
+      errorHandler(error);
     }
   };
 

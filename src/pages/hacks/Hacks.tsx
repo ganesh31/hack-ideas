@@ -248,14 +248,12 @@ const Hacks: React.FC<Props> = (props: Props) => {
             );
           })
         ) : (
-          <>
-            <h1 className="text-center font-semibold ">
+          <div className="mt-20">
+            <h1 className="text-center text-lg font-semibold ">
               Sorry no hacks are currently available.
             </h1>
-            <p className="italic text-center">
-              Waiting for someone to add some hacks
-            </p>
-          </>
+            <p className="italic text-sm text-center">Login to add new Hacks</p>
+          </div>
         )}
       </section>
     </div>

@@ -34,7 +34,7 @@
     "test:all": "concurrently \"npm:test:db\" \"NODE_OPTIONS=--experimental-vm-modules react-scripts test --coverage\"",
     "eject": "react-scripts eject",
     "test:db": "json-server db-test.json --port 3001",
-    "start:db": "json-server --watch db.json --port 3001",
+    "start:db": "json-server --watch ./db/db.json --port 3001",
     "cypress:run": "concurrently \"npm:test:db\" \"react-scripts start\" \"cypress run\""
   },
   "eslintConfig": {

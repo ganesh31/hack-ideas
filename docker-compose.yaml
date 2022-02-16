@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  json-db:
+    image: vimagick/json-server
+    command: -H 0.0.0.0 -p 3000 -w db.json
+    ports:
+      - 3001:3000
+    volumes:
+      - ./db:/data
+  hack-ideas:
+    build: .
+    ports:
+      - 8080:80
+    depends_on:
+      - json-db
+
